@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1828">
+  <meta name="description" content="FlowLab: impara, disegna ed esegui diagrammi di flusso direttamente nel browser.">
+  <title>FlowLab — Impara a ragionare con i diagrammi di flusso</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.6 2.6 0 0 1 4.9 1.3c0 2-2.7 2.1-2.7 4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5z"/></symbol>
+    <symbol id="i-step" viewBox="0 0 24 24"><path d="m4 5 10 7-10 7V5zM19 5v14"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 8a7 7 0 0 1 12-2l2 1M4 17l2 1a7 7 0 0 0 12-2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 17V4m-5 5 5-5 5 5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M4 3h14l3 3v15H3V3h1zM7 3v7h10V3M7 21v-8h10v8"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6M10 7v6M7 10h6"/></symbol>
+    <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="M15 15l6 6M7 10h6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2.5" y="3" width="19" height="18" rx="2"/><path d="m6 8 4 4-4 4M13 16h5"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-2"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5M20 9H10a6 6 0 0 0 0 12h2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4m-4-6a7 7 0 1 1 4 0l-1 3h-2l-1-3z"/></symbol>
+  </svg>
+  <header class="topbar">
+    <a class="brand" href="#impara" aria-label="FlowLab, torna alla pagina Impara">
+      <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+      <span>flow<span class="brand-accent">lab</span><small>EDUCATION STUDIO</small></span>
+    </a>
+    <nav class="topnav" aria-label="Navigazione principale">
+      <button type="button" class="nav-link active" data-target="impara"><svg class="ico"><use href="#i-book"/></svg> Impara</button>
+      <button type="button" class="nav-link" data-target="laboratorio"><svg class="ico"><use href="#i-grid"/></svg> Laboratorio</button>
+      <button type="button" class="nav-link" data-target="esempi"><svg class="ico"><use href="#i-layers"/></svg> Esempi</button>
+      <button type="button" class="nav-link" data-target="guida"><svg class="ico"><use href="#i-help"/></svg> Guida</button>
+    </nav>
+    <div class="header-meta"><span class="saved-dot"></span><span id="save-status">Salvataggio locale attivo</span></div>
+  </header>
+
+  <main id="view-impara" class="page page-content active">
+    <div class="learn-hero">
+      <div class="learn-hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> IL LABORATORIO DI LOGICA</div>
+        <h1>Le grandi idee iniziano <em>da un diagramma.</em></h1>
+        <p>Impara a progettare algoritmi, collegare le istruzioni e osservare il programma mentre viene eseguito. Un blocco alla volta.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-large" data-target="laboratorio">Apri il laboratorio <svg class="ico"><use href="#i-arrow"/></svg></button>
+          <button class="btn btn-white btn-large" data-target="esempi">Esplora gli esempi</button>
+        </div>
+        <div class="hero-stats"><span><strong>4</strong> lezioni guidate</span><span><strong>4</strong> esempi interattivi</span><span><strong>100%</strong> nel browser</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 520 380" fill="none" class="hero-illustration">
+          <defs><filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#1e3763" flood-opacity=".12"/></filter></defs>
+          <path d="M255 85V119M255 181V211M255 285V327" stroke="#9AAFC9" stroke-width="3" stroke-dasharray="6 6"/>
+          <path d="M255 84v6m-5-5 5 7 5-7" stroke="#9AAFC9" stroke-width="2"/>
+          <rect x="166" y="24" width="178" height="65" rx="32" fill="#12233B" filter="url(#shadow)"/>
+          <circle cx="195" cy="56" r="12" fill="#3FDCBA"/><path d="m191 56 3 3 6-7" stroke="#12382F" stroke-width="2.5" stroke-linecap="round"/><text x="257" y="62" text-anchor="middle" fill="white" font-size="19" font-weight="700">INIZIO</text>
+          <rect x="148" y="117" width="214" height="68" rx="13" fill="white" stroke="#C9DAED" stroke-width="2" filter="url(#shadow)"/><rect x="160" y="129" width="5" height="44" rx="2" fill="#6D75EF"/><text x="256" y="157" text-anchor="middle" fill="#17243A" font-size="17" font-weight="700">Leggi un numero</text><text x="256" y="172" text-anchor="middle" fill="#8191A9" font-size="12">input: numero</text>
+          <path d="M255 205 365 262 255 319 145 262 255 205Z" fill="#EFFAF6" stroke="#4CC3A0" stroke-width="2" filter="url(#shadow)"/><text x="255" y="256" text-anchor="middle" fill="#1D6954" font-size="16" font-weight="700">numero &gt; 0?</text><text x="255" y="273" text-anchor="middle" fill="#439A80" font-size="12">condizione</text>
+          <path d="M366 262H430V304" stroke="#58BFA1" stroke-width="3" stroke-linecap="round"/><path d="m424 299 6 8 6-8" stroke="#58BFA1" stroke-width="3" stroke-linejoin="round"/><rect x="373" y="242" width="36" height="20" rx="10" fill="#E8FAF3"/><text x="391" y="256" fill="#26936C" text-anchor="middle" font-size="11" font-weight="800">SÌ</text>
+          <path d="M145 262H78V305" stroke="#9AAFC9" stroke-width="3"/><path d="m72 300 6 8 6-8" stroke="#9AAFC9" stroke-width="3"/><rect x="103" y="242" width="35" height="20" rx="10" fill="#EDF2FA"/><text x="120" y="256" text-anchor="middle" fill="#67798F" font-size="11" font-weight="800">NO</text>
+          <rect x="17" y="308" width="132" height="49" rx="10" fill="white" stroke="#C9DAED" stroke-width="2"/><text x="83" y="338" fill="#415674" font-size="14" text-anchor="middle" font-weight="700">Riprova</text>
+          <rect x="361" y="308" width="140" height="49" rx="10" fill="#E8FAF3" stroke="#53C9A7" stroke-width="2"/><text x="431" y="338" fill="#247A62" font-size="14" text-anchor="middle" font-weight="700">Continua!</text>
+        </svg>
+        <div class="floating-pill pill-one">01 <span>Progetta</span></div><div class="floating-pill pill-two">02 <span>Verifica</span></div>
+      </div>
+    </div>
+
+    <div class="section-heading"><div><span class="section-kicker">IL TUO PERCORSO</span><h2>Impara in quattro passi</h2><p>Le basi della programmazione, spiegate attraverso i diagrammi di flusso.</p></div><span class="section-count">01 — 04</span></div>
+    <section class="lesson-grid" aria-label="Lezioni di programmazione">
+      <article class="lesson-card"><div class="lesson-top"><span class="lesson-num">LEZIONE 01</span><span class="lesson-icon icon-coral">◇</span></div><h3>I simboli fondamentali</h3><p>Inizio e fine, operazioni, input/output e decisioni. Ogni forma racconta un'azione.</p><div class="lesson-detail"><span class="symbol-chip oval">Inizio / Fine</span><span class="symbol-chip">Operazione</span><span class="symbol-chip diamond-chip">Condizione</span></div><button class="text-action" data-example="saluto">Prova il primo diagramma <svg class="ico"><use href="#i-arrow"/></svg></button></article>
+      <article class="lesson-card"><div class="lesson-top"><span class="lesson-num">LEZIONE 02</span><span class="lesson-icon icon-blue">x</span></div><h3>Variabili e calcoli</h3><p>Usa le variabili per conservare dati e le espressioni per fare calcoli.</p><div class="lesson-code"><span>prezzo = 10</span><span>totale = prezzo * 2</span></div><button class="text-action" data-example="somma">Vedi un algoritmo con variabili <svg class="ico"><use href="#i-arrow"/></svg></button></article>
+      <article class="lesson-card"><div class="lesson-top"><span class="lesson-num">LEZIONE 03</span><span class="lesson-icon icon-mint">↗</span></div><h3>Scelte e condizioni</h3><p>Fai prendere decisioni ai tuoi algoritmi con due percorsi alternativi: SÌ e NO.</p><div class="lesson-code"><span>numero % 2 == 0</span><span class="code-comment">// È un numero pari?</span></div><button class="text-action" data-example="pari">Prova una condizione <svg class="ico"><use href="#i-arrow"/></svg></button></article>
+      <article class="lesson-card"><div class="lesson-top"><span class="lesson-num">LEZIONE 04</span><span class="lesson-icon icon-amber">↻</span></div><h3>Cicli e ripetizioni</h3><p>Ripeti una sequenza di operazioni finché una condizione rimane vera.</p><div class="lesson-code"><span>i = i + 1</span><span class="code-comment">// Ripeti finché i &lt;= 5</span></div><button class="text-action" data-example="ciclo">Esplora un ciclo <svg class="ico"><use href="#i-arrow"/></svg></button></article>
+    </section>
+    <section class="quiz-section" aria-labelledby="quiz-heading">
+      <div class="quiz-info"><span class="section-kicker">METTITI ALLA PROVA</span><h2 id="quiz-heading">Hai capito la logica?</h2><p>Tre domande rapide per verificare i concetti prima di costruire il tuo diagramma.</p><div class="quiz-tally" id="quiz-progress">DOMANDA 1 DI 3</div></div>
+      <div class="quiz-card" id="quiz-card" aria-live="polite"></div>
+    </section>
+    <section class="practice-banner"><div class="practice-icon"><svg class="ico"><use href="#i-bulb"/></svg></div><div><h3>La logica si impara sperimentando.</h3><p>Apri un esempio, modifica un blocco ed eseguilo passo dopo passo. Nessuna installazione, nessun account.</p></div><button class="btn btn-primary" data-target="laboratorio">Vai al laboratorio <svg class="ico"><use href="#i-arrow"/></svg></button></section>
+  </main>
+
+  <main id="view-laboratorio" class="page editor-page" hidden>
+    <div class="editor-head"><div><span class="section-kicker">AREA DI LAVORO</span><h1>Laboratorio <span>visuale</span></h1><p>Crea i blocchi, collegali e guarda il tuo algoritmo prendere vita.</p></div><div class="editor-head-actions"><button class="btn btn-soft" id="new-project"><svg class="ico"><use href="#i-plus"/></svg> Nuovo</button><button class="btn btn-soft" id="import-btn"><svg class="ico"><use href="#i-upload"/></svg> Importa</button><div class="export-group"><button class="btn btn-dark" id="export-json"><svg class="ico"><use href="#i-download"/></svg> Esporta JSON</button><button class="btn btn-soft icon-only" id="export-svg" title="Esporta immagine SVG" aria-label="Esporta immagine SVG">SVG</button></div></div></div>
+    <div class="editor-shell">
+      <aside class="panel palette-panel"><div class="panel-heading"><h2>Libreria blocchi</h2><p>Clicca per aggiungere</p></div><div class="palette-items">
+        <button class="palette-item" data-add="start"><span class="palette-glyph glyph-start"><i></i></span><span><strong>Inizio</strong><small>Avvia l'algoritmo</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        <button class="palette-item" data-add="process"><span class="palette-glyph glyph-process"><i></i></span><span><strong>Operazione</strong><small>Calcoli e assegnazioni</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        <button class="palette-item" data-add="input"><span class="palette-glyph glyph-input"><i></i></span><span><strong>Input</strong><small>Chiedi un valore</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        <button class="palette-item" data-add="decision"><span class="palette-glyph glyph-decision"><i></i></span><span><strong>Decisione</strong><small>Percorsi SÌ e NO</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        <button class="palette-item" data-add="output"><span class="palette-glyph glyph-output"><i></i></span><span><strong>Output</strong><small>Mostra un risultato</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+        <button class="palette-item" data-add="end"><span class="palette-glyph glyph-end"><i></i></span><span><strong>Fine</strong><small>Termina l'algoritmo</small></span><svg class="ico"><use href="#i-plus"/></svg></button>
+      </div><div class="palette-tip"><svg class="ico"><use href="#i-info"/></svg><p><strong>Come collegare?</strong><br>Clicca un pallino colorato su un blocco, poi clicca il blocco di destinazione.</p></div><div class="palette-footer"><span class="tiny-dot"></span> I diagrammi si salvano su questo dispositivo</div></aside>
+      <div class="workspace-column"><div class="workspace-toolbar"><div class="toolbar-left"><span class="file-indicator"></span><input id="project-title" maxlength="64" aria-label="Nome progetto" value="Il mio algoritmo"><span class="toolbar-divider"></span><button class="tool-btn" id="undo-btn" title="Annulla (Ctrl+Z)"><svg class="ico"><use href="#i-undo"/></svg></button><button class="tool-btn" id="redo-btn" title="Ripristina (Ctrl+Y)"><svg class="ico"><use href="#i-redo"/></svg></button></div><div class="toolbar-right"><button class="tool-btn" id="zoom-out" title="Riduci"><svg class="ico"><use href="#i-zoom-out"/></svg></button><span id="zoom-value">100%</span><button class="tool-btn" id="zoom-in" title="Ingrandisci"><svg class="ico"><use href="#i-zoom-in"/></svg></button><button class="tool-btn" id="zoom-fit" title="Adatta alla vista"><svg class="ico"><use href="#i-target"/></svg></button></div></div>
+        <div class="canvas-viewport" id="canvas-viewport" aria-label="Area di costruzione del diagramma"><div id="canvas-plane" class="canvas-plane"><div class="canvas-surface" id="canvas-surface"><svg id="connections" class="connections" xmlns="http://www.w3.org/2000/svg" width="1800" height="1300" viewBox="0 0 1800 1300"><defs><marker id="arrow-normal" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L7 3L0 6Z" fill="#8da0ba"/></marker><marker id="arrow-selected" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L7 3L0 6Z" fill="#5c5bea"/></marker></defs><g id="edges-layer"></g><path id="pending-edge" class="pending-edge" d="" hidden></path></svg><div id="nodes-layer"></div></div></div><div class="canvas-hint" id="canvas-hint">Trascina i blocchi per spostarli · Trascina lo sfondo per navigare</div><div class="canvas-count"><span id="node-count">0 blocchi</span> · <span id="edge-count">0 collegamenti</span></div></div>
+        <div class="runner"><div class="runner-top"><div class="runner-title"><div class="runner-terminal"><svg class="ico"><use href="#i-terminal"/></svg></div><span><strong>Console di esecuzione</strong><small id="run-status">Pronto per eseguire</small></span></div><div class="runner-actions"><label class="speed-label" for="speed">Velocità <input type="range" min="1" max="5" value="3" id="speed" title="Velocità di esecuzione"></label><button class="btn btn-soft btn-small" id="reset-btn"><svg class="ico"><use href="#i-refresh"/></svg> Reset</button><button class="btn btn-soft btn-small" id="step-btn"><svg class="ico"><use href="#i-step"/></svg> Passo</button><button class="btn btn-primary btn-small" id="run-btn"><svg class="ico"><use href="#i-play"/></svg> Esegui</button></div></div><div class="runner-content"><div class="console-output" id="console-output" role="log" aria-live="polite"><span class="console-placeholder">&gt; Premi «Esegui» per avviare il programma.</span></div><div class="variables-panel"><div class="variables-heading">VARIABILI <span id="step-count">0 passi</span></div><div id="variables-list" class="variables-list"><div class="empty-variables">Nessuna variabile</div></div></div></div></div>
+      </div>
+      <aside class="panel inspector-panel"><div class="panel-heading"><h2>Proprietà</h2><p>Personalizza la selezione</p></div><div id="inspector-content" class="inspector-body"></div></aside>
+    </div>
+  </main>
+
+  <main id="view-esempi" class="page page-content" hidden><div class="subpage-header"><span class="section-kicker">PARTI DA QUI</span><h1>Impara dagli <em>esempi</em></h1><p>Quattro algoritmi già pronti da aprire, eseguire e modificare. Scegli un progetto e sperimenta.</p></div><div class="example-grid">
+    <article class="example-card"><div class="example-graphic graphic-saluto"><span class="mini-oval">INIZIO</span><span class="mini-stem"></span><span class="mini-box">Come ti chiami?</span><span class="mini-stem"></span><span class="mini-box mint">Ciao, nome!</span></div><div class="example-body"><div class="example-meta"><span>PRINCIPIANTE</span><span>4 blocchi</span></div><h2>Il primo saluto</h2><p>Un semplice programma che chiede il tuo nome e ti saluta. Ideale per iniziare.</p><button class="btn btn-primary" data-example="saluto">Apri esempio <svg class="ico"><use href="#i-arrow"/></svg></button></div></article>
+    <article class="example-card"><div class="example-graphic graphic-pari"><span class="mini-oval">INIZIO</span><span class="mini-stem"></span><span class="mini-diamond">Pari?</span><div class="mini-split"><span>SÌ <strong>Pari</strong></span><span>NO <strong>Dispari</strong></span></div></div><div class="example-body"><div class="example-meta"><span>CONDIZIONI</span><span>6 blocchi</span></div><h2>Pari o dispari?</h2><p>Scopri come usare una condizione per scegliere tra due risultati diversi.</p><button class="btn btn-primary" data-example="pari">Apri esempio <svg class="ico"><use href="#i-arrow"/></svg></button></div></article>
+    <article class="example-card"><div class="example-graphic graphic-somma"><span class="mini-oval">INIZIO</span><span class="mini-stem"></span><span class="mini-box">a + b</span><span class="mini-stem"></span><span class="mini-box mint">Risultato</span></div><div class="example-body"><div class="example-meta"><span>VARIABILI</span><span>5 blocchi</span></div><h2>Somma due numeri</h2><p>Impara a memorizzare i numeri, eseguire una somma e visualizzare il risultato.</p><button class="btn btn-primary" data-example="somma">Apri esempio <svg class="ico"><use href="#i-arrow"/></svg></button></div></article>
+    <article class="example-card"><div class="example-graphic graphic-ciclo"><span class="mini-oval">INIZIO</span><span class="mini-stem"></span><span class="mini-diamond">i ≤ 5?</span><span class="mini-loop">↶ <b>Ripeti</b></span></div><div class="example-body"><div class="example-meta"><span>CICLI</span><span>6 blocchi</span></div><h2>Somma da 1 a 5</h2><p>Un ciclo che ripete un'operazione, aggiorna le variabili e raggiunge un risultato.</p><button class="btn btn-primary" data-example="ciclo">Apri esempio <svg class="ico"><use href="#i-arrow"/></svg></button></div></article>
+  </div></main>
+
+  <main id="view-guida" class="page page-content" hidden><div class="subpage-header"><span class="section-kicker">MANUALE RAPIDO</span><h1>Tutto quello che serve <em>per iniziare</em></h1><p>Dalla costruzione del diagramma alle espressioni, fino all'esecuzione.</p></div><div class="guide-grid"><section class="guide-panel"><h2>Costruisci il diagramma</h2><ol><li>Apri <strong>Laboratorio</strong> e aggiungi un blocco dalla barra laterale.</li><li>Trascina il blocco nella posizione desiderata.</li><li>Clicca il <strong>pallino colorato</strong> in uscita e poi il blocco di destinazione.</li><li>Per le decisioni, collega entrambe le uscite <strong>SÌ</strong> e <strong>NO</strong>.</li><li>Seleziona un blocco per configurarlo nel pannello <strong>Proprietà</strong>.</li></ol><div class="guide-note">Premi <kbd>Esc</kbd> per annullare un collegamento. <kbd>Canc</kbd> per eliminare il blocco o la freccia selezionati.</div></section><section class="guide-panel"><h2>Esegui e controlla</h2><ol><li>Inserisci esattamente un blocco di <strong>Inizio</strong>.</li><li>Premi <strong>Esegui</strong> per avviare automaticamente il diagramma.</li><li>Premi <strong>Passo</strong> per eseguire un blocco alla volta.</li><li>Leggi l'<strong>output</strong> nella console e controlla le variabili.</li><li>Premi <strong>Reset</strong> per ricominciare senza perdere il diagramma.</li></ol><div class="guide-note">I dati sono salvati solo nel browser. Esporta il JSON per portare il lavoro su altri dispositivi.</div></section><section class="guide-panel guide-wide"><h2>Sintassi delle espressioni</h2><p>Il laboratorio interpreta un piccolo linguaggio didattico. Non esegue codice JavaScript arbitrario.</p><div class="syntax-table"><div><strong>Assegnazione</strong><code>somma = a + b</code></div><div><strong>Operazioni</strong><code>+ &nbsp; - &nbsp; * &nbsp; / &nbsp; %</code></div><div><strong>Confronti</strong><code>&gt; &nbsp; &lt; &nbsp; &gt;= &nbsp; &lt;= &nbsp; == &nbsp; !=</code></div><div><strong>Operatori logici</strong><code>&amp;&amp; &nbsp; || &nbsp; !</code></div><div><strong>Testo</strong><code>"Ciao " + nome</code></div><div><strong>Condizione</strong><code>eta &gt;= 18</code></div></div><p class="muted-note">Un'operazione può contenere più assegnazioni, una per riga. Le variabili possono contenere numeri, testo o valori booleani. I nomi delle variabili iniziano con una lettera o un trattino basso, senza spazi.</p></section><section class="guide-panel guide-wide"><h2>Scorciatoie</h2><div class="shortcut-list"><span><kbd>Ctrl</kbd> + <kbd>Z</kbd> Annulla</span><span><kbd>Ctrl</kbd> + <kbd>Y</kbd> Ripristina</span><span><kbd>Canc</kbd> Elimina selezione</span><span><kbd>Esc</kbd> Deseleziona</span></div></section></div></main>
+
+  <input id="import-file" type="file" accept=".json,application/json" hidden>
+  <div id="input-modal" class="modal-backdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="input-modal-title"><div class="modal-symbol">?</div><span class="section-kicker">IL PROGRAMMA CHIEDE UN VALORE</span><h2 id="input-modal-title">Inserisci un dato</h2><p id="input-question">Qual è il valore?</p><form id="input-form"><label for="runtime-input">Valore da inserire</label><input type="text" id="runtime-input" autocomplete="off" required><div class="modal-actions"><button type="button" class="btn btn-soft" id="input-cancel">Interrompi</button><button class="btn btn-primary" type="submit">Conferma <svg class="ico"><use href="#i-arrow"/></svg></button></div></form></div></div>
+  <div id="confirm-modal" class="modal-backdrop" hidden><div class="modal confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><div class="modal-symbol warning">!</div><h2 id="confirm-title">Sostituire il diagramma?</h2><p id="confirm-message">Le modifiche correnti saranno sostituite. Puoi esportare il progetto prima di continuare.</p><div class="modal-actions"><button class="btn btn-soft" id="confirm-cancel">Annulla</button><button class="btn btn-primary" id="confirm-accept">Continua</button></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <footer class="site-footer">FLOWLAB <span>•</span> Laboratorio didattico di algoritmi e diagrammi di flusso <span>•</span> Funziona senza server</footer>
+  <script src="logic.js"></script><script src="app.js"></script>
+</body>
+</html>
